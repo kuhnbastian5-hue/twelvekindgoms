@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Twelve Kingdoms</title>
+<style>
+    body {
+        margin: 0;
+        background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+        color: white;
+        font-family: Georgia, serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+.container {
+    position: relative;
+    width: 90vmin;
+    height: 90vmin;
+}
+
+    .poem {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        width: 55%;
+        line-height: 1.6;
+        font-size: 18px;
+    }
+
+.castle {
+    position: absolute;
+    font-size: 65px;
+    filter:
+        brightness(1.6)
+        saturate(1.8)
+        drop-shadow(0 0 15px currentColor)
+        drop-shadow(0 0 35px currentColor)
+        drop-shadow(0 0 70px currentColor);
+}
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="poem">
+        Within the white sands, the twelve kingdoms rise and fall,<br>
+        Built from dust, sustained by struggle and memory.<br>
+        They fight beneath a sun that forgets every name,<br>
+        Chasing victories the wind erases by night.<br>
+        Banners fade, yet new ones always take their place,<br>
+        And every triumph quietly becomes tomorrow’s loss.<br>
+        The desert watches, patient and unmoved by kings,<br>
+        As borders shift like waves upon endless dunes.<br>
+        No crown endures, no kingdom truly conquers,<br>
+        For war itself is the only thing that survives.<br>
+        So they march, bound to battles without ending,<br>
+        Eternally trapped within the war they cannot win.
+    </div>
+
+<script>
+    const colors = [
+        "white",
+        "gold",
+        "blue",
+        "lightblue",
+        "green",
+        "lightgreen",
+        "purple",
+        "pink",
+        "lightpink",
+        "red",
+        "#ff7f7f",
+        "black"
+    ];
+
+    const container = document.querySelector(".container");
+    const rect = container.getBoundingClientRect();
+
+    const centerX = rect.width / 2;
+
+    const topY = rect.height * 0.12;
+    const bottomY = rect.height * 0.88;
+
+    const spacing = rect.width / 7; // even spacing across width
+
+    colors.forEach((color, i) => {
+
+        const castle = document.createElement("div");
+        castle.className = "castle";
+
+        // horizontal positions (6 evenly spaced)
+        const positionIndex = i % 6;
+        const x = spacing * (positionIndex + 1);
+
+        // top row or bottom row
+        const y = i < 6 ? topY : bottomY;
+
+        castle.style.left = x + "px";
+        castle.style.top = y + "px";
+        castle.style.transform = "translate(-50%, -50%)";
+        castle.style.color = color;
+        castle.textContent = "🏰";
+
+        if (color === "black") {
+            castle.style.filter =
+                "brightness(1.6) saturate(1.8) drop-shadow(0 0 20px white)";
+        }
+
+        container.appendChild(castle);
+    });
+</script>
